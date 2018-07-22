@@ -1,0 +1,11 @@
+.lastColumn{
+    text-align: right;
+}
+
+.processed{
+    text-align: center;
+}
+
+.success , .problem{
+    display: none;
+}

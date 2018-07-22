@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="col-md-12 text-center">
+        <h1 class="mt-5">Upload de Arquivos</h1>
+    </div>
+    <div class="dropzone my-dropzone" id="formUpload" action="{{path('documentUpload')}}"> </div>
+
+    <p></p>
+    <p class="col-md-12 text-center">
+        <button type="submit" class="execute btn btn-primary" >Processar fila de Upload</button>
+    </p>
+
+    <h2> Lista de arquivos </h2>
+    <div class="notifications">
+        <div class="alert alert-success alert-dismissible success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span class="successMessage"></span>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible problem">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Ocorreu algum erro verifique seu XML.
+        </div>
+
+    </div>
+    <div class="listaArquivos">
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}

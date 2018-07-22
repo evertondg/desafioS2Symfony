@@ -1,0 +1,49 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">NOME DO ARQUIVO</th>
+        <th scope="col" class="processed">EXECUTADO</th>
+        <th scope="col" class="lastColumn">AÇÔES</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for arquivo in arquivos %}
+
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td class="nomeArquivo{{ loop.index }}">{{ arquivo.name | upper }}</td>
+
+            <td class="processed">
+
+                {% if arquivo.processed %}
+                    SIM
+                {% else %}
+                    NÃO
+                {% endif  %}
+
+            </td>
+
+            <td  class="lastColumn">
+                {% if arquivo.processed == null %}
+                    <button class="btn btn-success btn-sm executeFile" title="Processar" data-placement="left" data-toggle="tooltip" onclick="Challenge.processFile('{{ arquivo.id | lower }}')"  >
+                        <i class="fa fa-cog fa-lg"></i>
+                    </button>
+                {% endif %}
+                <button class="btn btn-danger btn-sm deleteFile" title="Deletar" onclick="Challenge.deleteFileInFolder('{{ arquivo.id | lower }}')"  >
+                    <i class="fa fa-trash fa-lg"></i>
+                </button>
+
+
+
+
+            </td>
+        </tr>
+
+
+
+    {% endfor %}
+
+
+    </tbody>
+</table>
