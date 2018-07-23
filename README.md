@@ -69,11 +69,14 @@ Ao pressionar <Enter> pela última vez o symfony está pronto para ser utilizado
 
 
 # Observações
-Encontrei um problema na estrutura do arquivo *shiporders.xml* as tags `<items></items>` das linhas **37** e **61** não estavam devidamente fechadas, tomei a liberdade de corrigir e disponibilizar um terceiro arquivo de nome `shipordersOK.xml` que é o arquivo que funciona corretamente no momento de importar.
-
-
+* Encontrei um problema na estrutura do arquivo *shiporders.xml* as tags `<items></items>` das linhas **37** e **61** não estavam devidamente fechadas, tomei a liberdade de corrigir e disponibilizar um terceiro arquivo de nome `shipordersOK.xml` que é o arquivo que funciona corretamente no momento de importar.
 Todos os arquivos XML estão disponibilizados no diretório xmlFiles deste repositório.  
 
+* Tentei criar o ambiente no docker. Ao gerar os containers do nginx, php e mysql não obtive sucesso em servir a aplicação, acredito que estaou errando no arquivo de configuração do servidor web ou até ao mapear os volumes de cada container. Devido minha pouca experiência ainda com Docker e o tempo de desenvolvimento estar finalizando, decidi não continuar para não comprometer meu prazo.
+  
+ 
+ 
+ 
 
 ## Próximas implementações
 
