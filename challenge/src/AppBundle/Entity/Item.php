@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Items
+ * Item
  *
  * @ORM\Table(name="items")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemsRepository")
  */
-class Items
+class Item
 {
     /**
      * @var int
@@ -52,7 +52,7 @@ class Items
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal", precision=2, scale=0)
+     * @ORM\Column(name="price", type="string", length=255)
      */
     private $price;
 
@@ -72,7 +72,7 @@ class Items
      *
      * @param integer $orderid
      *
-     * @return Items
+     * @return Item
      */
     public function setOrderid($orderid)
     {
@@ -96,7 +96,7 @@ class Items
      *
      * @param string $title
      *
-     * @return Items
+     * @return Item
      */
     public function setTitle($title)
     {
@@ -120,7 +120,7 @@ class Items
      *
      * @param string $note
      *
-     * @return Items
+     * @return Item
      */
     public function setNote($note)
     {
@@ -144,7 +144,7 @@ class Items
      *
      * @param integer $quantity
      *
-     * @return Items
+     * @return Item
      */
     public function setQuantity($quantity)
     {
@@ -168,7 +168,7 @@ class Items
      *
      * @param string $price
      *
-     * @return Items
+     * @return Item
      */
     public function setPrice($price)
     {

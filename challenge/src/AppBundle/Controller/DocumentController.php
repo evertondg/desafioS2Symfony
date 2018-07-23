@@ -7,7 +7,8 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\Phone;
 use AppBundle\Entity\Shiporder;
 use AppBundle\Entity\Shipto;
-use AppBundle\Entity\Items;
+use AppBundle\Entity\Item;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -43,14 +44,12 @@ class DocumentController extends Controller
         $document->setPath($media->getPathName());
         $document->setName($media->getClientOriginalName());
         $document->setProcessed(0);
-//        dump($document);die();
 
         $document->upload();
         $em->persist($document);
         $em->flush();
 
-        //infos sur le document envoyé
-        //var_dump($request->files->get('file'));die;
+
         return new JsonResponse(array('success' => true));
     }
 
@@ -82,8 +81,6 @@ class DocumentController extends Controller
 
         $documents = $em->getRepository('AppBundle\Entity\Document')->findAll();
 
-       //  dump($documents);die();
-
         return $this->render('document/index.html.twig',[
             'arquivos' => $documents
         ]);
@@ -105,6 +102,7 @@ class DocumentController extends Controller
             throw $this->createNotFoundException('No document found for id '.$id);
             $deletedFile = false ;
         }else{
+
             $em->remove($doc);
             $em->flush();
             $file = __DIR__.'/../../../web/files/uploads/'.$doc->getName();
@@ -162,7 +160,7 @@ class DocumentController extends Controller
     }
 
 
-    /*PEOPLE XML FUNCTIONS  REFATORAR CODIGO*/
+    /*REFATORAR CODIGO*/
     public function persistPeople($people){
 
         foreach ( $people["person"] as $peopleItem){
@@ -207,19 +205,17 @@ class DocumentController extends Controller
 
 
             $shiporder = new Shiporder();
-            $shiporder->setPersonid($shipordersItem["orderid"]);
+            $shiporder->setOrderid($shipordersItem["orderid"]);
             $shiporder->setOrderperson($shipordersItem["orderperson"]);
 
 
             $this->persistShipto($shipordersItem["shipto"],$shipordersItem["orderid"]);
-
-            dump($shiporder);
-
             $this->persistItems($shipordersItem["items"],$shipordersItem["orderid"]);
-
 
             $em->persist($shiporder);
             $em->flush();
+
+
 
         }
 
@@ -227,32 +223,63 @@ class DocumentController extends Controller
     }
 
     public function persistShipto($shipto,$orderid){
-        dump($shipto);
-        dump($shipto["name"]);
-        die();
+        $em = $this->getDoctrine()->getManager();
 
-        $length = count($shipto);
 
-        for ($i = 0; $i <= $length ; $i++) {
             $to = new Shipto();
+            $to->setOrderid($orderid);
             $to->setName($shipto["name"]);
+            $to->setAddress($shipto["address"]);
+            $to->setCity($shipto["city"]);
+            $to->setCountry($shipto["country"]);
 
-            $phone->setPersonid($person);
-            $phone->setPhone($phones["phone"][$i]);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($phone);
+            $em->persist($to);
             $em->flush();
-        }
+
 
 
 
     }
 
     public function persistItems($items,$orderid){
+        $em = $this->getDoctrine()->getManager();
+
+
+
+        foreach ( $items as $it){
+
+
+
+            if (!isset($it[0])){
+
+                $item = new Item();
+                $item->setOrderid($orderid);
+                $item->setTitle($it["title"]);
+                $item->setNote($it["note"]);
+                $item->setQuantity($it["quantity"]);
+                $item->setPrice($it["price"]);
+                $em->persist($item);
+                $em->flush();
+            }else{
+
+                foreach ($it as $itm) {
+                    $item = new Item();
+                    $item->setOrderid($orderid);
+                    $item->setTitle($itm["title"]);
+                    $item->setNote($itm["note"]);
+                    $item->setQuantity($itm["quantity"]);
+                    $item->setPrice($itm["price"]);
+                    $em->persist($item);
+                    $em->flush();
+                }
+
+            }
+        }
+
 
     }
 
-
+    /* REFATORAR CODIGO */
 
 
 }
