@@ -64,12 +64,12 @@ Ao pressionar <Enter> pela última vez o symfony está pronto para ser utilizado
 
 
 ## Link da documentação da API 
-    https://documenter.getpostman.com/view/115648/RWMHLnU7
+   [Documentação da API](https://documenter.getpostman.com/view/115648/RWMHLnU7)
 
 
 
 # Observações
-Encontrei um problema na estrutura do arquivo `shiporders.xml` as tags `<items></items>` das linhas `37` e `61` não estavam devidamente fechadas, tomei a liberdade de corrigir e disponibilizar um terceiro arquivo de nome `shipordersOK.xml` que é o arquivo que funciona corretamente no momento de importar.
+Encontrei um problema na estrutura do arquivo *shiporders.xml* as tags `<items></items>` das linhas **37** e **61** não estavam devidamente fechadas, tomei a liberdade de corrigir e disponibilizar um terceiro arquivo de nome `shipordersOK.xml` que é o arquivo que funciona corretamente no momento de importar.
 
 
 Todos os arquivos XML estão disponibilizados no diretório xmlFiles deste repositório.  
