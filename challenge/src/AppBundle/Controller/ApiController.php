@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- ***   @Route("/api", name="getPeople")
+ ***   @Route("/api")
  **/
 class ApiController extends Controller
 {
@@ -53,6 +53,22 @@ class ApiController extends Controller
 //        }
 
 
+
+        return new Response($people);
+    }
+
+
+
+    /**
+     *   @Route("/person/{idperson}", name="getPerson")
+     *
+     **/
+    public function getPerson($idperson){
+
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Person')->findBy(['personid' => $idperson]);
+
+        $people = $this->get('jms_serializer')->serialize($items,'json');
 
         return new Response($people);
     }
@@ -100,6 +116,33 @@ class ApiController extends Controller
         return new Response($itemsList);
     }
 
+    /**
+     ***   @Route("/item/{id}", name="getItem")
+     *     @Method("GET")
+     **/
+    public function getItem($id){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Item')->find($id);
+
+        $itemsList = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($itemsList);
+    }
+
+
+    /**
+     ***   @Route("/item/order/{orderid}", name="getItemOrder")
+     *     @Method("GET")
+     **/
+    public function getItemPerson($orderid){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Item')->findBy(['orderid'=> $orderid]);
+        $itemsList = $this->get('jms_serializer')->serialize($items,'json');
+        return new Response($itemsList);
+    }
+
+
+
 
     /**
      ***   @Route("/phone", name="getPhones")
@@ -137,6 +180,20 @@ class ApiController extends Controller
     public function getShipto(){
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository('AppBundle:Shipto')->findAll();
+
+        $shipto = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($shipto);
+    }
+
+
+    /**
+     ***   @Route("/shipto/order/{orderid}", name="shipToOrder")
+     *     @Method("GET")
+     **/
+    public function getShiptoOrder($orderid){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Shipto')->findBy(['orderid'=> $orderid]);
 
         $shipto = $this->get('jms_serializer')->serialize($items,'json');
 
