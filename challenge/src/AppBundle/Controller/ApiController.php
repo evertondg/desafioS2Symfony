@@ -28,7 +28,7 @@ class ApiController extends Controller
     }
 
     /**
-     *   @Route("/people", name="getPeople")
+     *   @Route("/person", name="getPeople")
      *
      **/
     public function getPeople(){
@@ -57,8 +57,11 @@ class ApiController extends Controller
         return new Response($people);
     }
 
+
+
     /**
-     ***   @Route("/documents", name="getDocuments")
+     ***   @Route("/document", name="getDocuments")
+     *     @Method("GET")
      **/
     public function getDocuments(){
         $em = $this->getDoctrine()->getManager();
@@ -69,8 +72,24 @@ class ApiController extends Controller
         return new Response($documents);
     }
 
+
     /**
-     ***   @Route("/items", name="getItems")
+     ***   @Route("/document/{id}", name="getDocument")
+     *     @Method("GET")
+     **/
+    public function getDocument($id){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Document')->find($id);
+
+        $document = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($document);
+    }
+
+
+    /**
+     ***   @Route("/item", name="getItems")
+     *     @Method("GET")
      **/
     public function getItems(){
         $em = $this->getDoctrine()->getManager();
@@ -81,8 +100,10 @@ class ApiController extends Controller
         return new Response($itemsList);
     }
 
+
     /**
-     ***   @Route("/phones", name="getPhones")
+     ***   @Route("/phone", name="getPhones")
+     *     @Method("GET")
      **/
     public function getPhones(){
         $em = $this->getDoctrine()->getManager();
@@ -93,8 +114,25 @@ class ApiController extends Controller
         return new Response($phones);
     }
 
+
+    /**
+     ***   @Route("/phone/person/{idperson}", name="getPhone")
+     *     @Method("GET")
+     **/
+    public function getPhonePerson($idperson){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Phone')->findBy(['personid' => $idperson]);
+
+        $phones = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($phones);
+    }
+
+
+
     /**
      ***   @Route("/shipto", name="shipTo")
+     *     @Method("GET")
      **/
     public function getShipto(){
         $em = $this->getDoctrine()->getManager();
@@ -107,7 +145,7 @@ class ApiController extends Controller
 
 
     /**
-     ***   @Route("/shiporders", name="shipOrders")
+     ***   @Route("/shiporder", name="shipOrders")
      **/
     public function getShipOrders(){
         $em = $this->getDoctrine()->getManager();
@@ -117,4 +155,33 @@ class ApiController extends Controller
 
         return new Response($shiporders);
     }
+
+
+    /**
+     ***   @Route("/shiporder/person/{idperson}", name="shipOrdersPerson")
+     **/
+    public function getShipOrdersPerson($idperson){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Shiporder')->findBy(['orderperson' => $idperson]);
+
+
+
+        $shipordersPerson = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($shipordersPerson);
+    }
+
+
+    /**
+     ***   @Route("/shiporder/{id}", name="shipOrder")
+     **/
+    public function getShipOrder($id){
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository('AppBundle:Shiporder')->find($id);
+
+        $shiporder = $this->get('jms_serializer')->serialize($items,'json');
+
+        return new Response($shiporder);
+    }
+
 }

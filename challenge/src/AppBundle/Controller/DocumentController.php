@@ -179,18 +179,35 @@ class DocumentController extends Controller
 
     }
 
-    public function persistPhones($phones,$person){
+    public function persistPhones($phones, $person){
+        $em = $this->getDoctrine()->getManager();
+        foreach ($phones as $phone){
+
+            if( gettype($phone) == 'string'){
+
+                $item = new Phone();
+                $item->setPersonid($person);
+                $item->setPhone($phone);
+                $em->persist($item);
+                $em->flush();
+
+            }else{
+
+                foreach ($phone as $pho) {
+
+                    $item = new Phone();
+                    $item->setPersonid($person);
+                    $item->setPhone($pho);
+                    $em->persist($item);
+                    $em->flush();
+
+                }
+
+            }
 
 
-        $length = count($phones);
-        for ($i = 0; $i <= $length ; $i++) {
-            $phone = new Phone();
-            $phone->setPersonid($person);
-            $phone->setPhone($phones["phone"][$i]);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($phone);
-            $em->flush();
         }
+
     }
 
     /* END PEOPLE XML FUNCTIONS */
