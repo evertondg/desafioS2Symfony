@@ -5,7 +5,7 @@ Este projeto foi desenvolvido como um desafio para conquistar a vaga de desenvol
 
  
  
-#Pré requisitos: 
+## Pré requisitos: 
 - [GIT](https://git-scm.com/) 
 - [PHP 7.*](http://php.net/downloads.php)
 - [Mysql](https://www.mysql.com/) 
@@ -16,14 +16,14 @@ Os pré requisitos devem estar instalados e configurados devidamente em sua máq
 
 Acesse seu terminal e siga os seguintes passos
 
-#Inicialmente clonamos o repositório:
+## Inicialmente clonamos o repositório:
     git clone https://github.com/evertondg/desafioS2Symfony.git
 
 
-#Entramos no diretorio do projeto
+## Entramos no diretorio do projeto
      cd desafioS2Symfony\challenge
 
-#Instalamos as dependecias do projeto 
+## Instalamos as dependecias do projeto 
     composer install
 
 
@@ -43,17 +43,17 @@ Ao final da instalação o `composer` irá auxiliar na configuração do projeto
 
 Ao pressionar <Enter> pela última vez o symfony está pronto para ser utilizado.
 
-#Para criar o banco de dados digite o comando:
+## Para criar o banco de dados digite o comando:
             
     php app/console doctrine:database:create
 
-# Para gerar as tabelas do banco de dados digite o comando:
+## Para gerar as tabelas do banco de dados digite o comando:
     php app/console doctrine:schema:update --force
 
-# Para servir a aplicação digite o comando:    
+## Para servir a aplicação digite o comando:    
     php app/console server:run
 
-# Se tudo estiver correto você verá uma mensagem parecida com esta:
+## Se tudo estiver correto você verá uma mensagem parecida com esta:
     [OK] Server running on http://127.0.0.1:8000
 
 **PRONTO!** Agora é só acessar o endereço fornecido através do seu navegador.
@@ -63,19 +63,19 @@ Ao pressionar <Enter> pela última vez o symfony está pronto para ser utilizado
 
 
 
-##Link da documentação da API 
+## Link da documentação da API 
     https://documenter.getpostman.com/view/115648/RWMHLnU7
 
 
 
-#Observações
+# Observações
 Encontrei um problema na estrutura do arquivo `shiporders.xml` as tags `<items></items>` das linhas `37` e `61` não estavam devidamente fechadas, tomei a liberdade de corrigir e disponibilizar um terceiro arquivo de nome `shipordersOK.xml` que é o arquivo que funciona corretamente no momento de importar.
 
 
 Todos os arquivos XML estão disponibilizados no diretório xmlFiles deste repositório.  
 
 
-#Próximas implementações
+## Próximas implementações
 
 * Gerar o ambiente em docker para servir esta aplicação
 * Implementar o sistema de autenticação na API 
